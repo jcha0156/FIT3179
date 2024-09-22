@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Registrations in Malaysia - Choropleth Map</title>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.21.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.6.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.21.0"></script>
+</head>
+<body>
+    <h1>Car registration transactions by state in Malaysia for the year 2024</h1>
+    <!-- Div to embed the Vega-Lite visualization -->
+    <div id="visualization"></div>
+
+    <script type="text/javascript">
+        // Vega-Lite specification
+        var vlSpec = {
+            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+            "description": "Car registration transactions by state in Malaysia for the year 2024",
+            "width": 600,
+            "height": 400,
+            "data": {
+                "url": "https://github.com/jcha0156/FIT3179/blob/main/ne_110m.json",
+                "format": {
+                "type": "topojson",
+                "feature": "ne_110m_admin_1_ states_provinces"
+                }
+            },
+            "transform": [
+                {
+                "lookup": "properties.name", 
+                "from": {
+                    "data": {
+                    "url": "https://github.com/jcha0156/FIT3179/blob/main/car_registration_by_state.csv",
+                    "format": {"type": "csv"}
+                    },
+                    "key": "state", 
+                    "fields": ["Total_Registrations"]
+                }
+                }
+            ],
+            "projection": {
+                "type": "mercator"
+            },
+            "mark": "geoshape",
+            "encoding": {
+                "color": {
+                "field": "Total_Registrations",
+                "type": "quantitative",
+                "scale": {
+                    "scheme": "blues"
+                }
+                },
+                "tooltip": [
+                {"field": "properties.name", "type": "nominal", "title": "state"},
+                {"field": "Total_Registrations", "type": "quantitative", "title": "Car Registrations"}
+                ]
+            }
+        };
+
+        // Embed the visualization in the div
+        vegaEmbed('#visualization', vlSpec).then(function(result) {
+            // Access the Vega view instance as result.view
+        }).catch(console.error);
+    </script>
+</body>
+</html>
