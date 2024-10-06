@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Car Registrations by Maker and Model (2024)</title>
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+</head>
+<body>
+  <h1>Car Registrations by Maker and Model (2024)</h1>
+  
+  <!-- Container to hold the Vega-Lite visualization -->
+  <div id="vis"></div>
+
+  <script type="text/javascript">
+    var spec = {
+      "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+      "width": 500,
+      "height": 400,
+      "title": "Car Registrations by Maker and Model (2024)",
+      "data": {
+        "url": "https://raw.githubusercontent.com/jcha0156/FIT3179/main/cars_2024.csv"
+      },
+      "mark": "circle",
+      "encoding": {
+        "x": {
+          "field": "maker",
+          "type": "nominal",
+          "title": "Car Maker",
+          "axis": {
+            "labelAngle": -45  // Rotate x-axis labels
+          }
+        },
+        "y": {
+          "field": "model",
+          "type": "nominal",
+          "title": "Car Model"
+        },
+        "color": {
+          "field": "fuel",
+          "type": "nominal",
+          "title": "Fuel Type"
+        },
+        "size": {
+          "aggregate": "count",
+          "type": "quantitative",
+          "title": "Number of Registrations",
+          "scale": {"range": [10, 1000]}  // Adjust bubble size range
+        },
+        "tooltip": [
+          {"field": "maker", "type": "nominal", "title": "Car Maker"},
+          {"field": "model", "type": "nominal", "title": "Car Model"},
+          {"field": "fuel", "type": "nominal", "title": "Fuel Type"},
+          {"aggregate": "count", "type": "quantitative", "title": "Number of Registrations"}
+        ]
+      },
+      "config": {
+        "axis": {
+          "grid": true  // Show gridlines for clarity
+        }
+      }
+    };
+
+    // Embed the visualization in the 'vis' div
+    vegaEmbed('#vis', spec);
+  </script>
+</body>
+</html>
