@@ -1,41 +1,41 @@
 "type","Month","TotalRegistrations"
-"jip","Jan",15211
-"jip","Feb",12829
-"jip","Mar",13357
-"jip","Apr",15468
-"jip","May",14829
-"jip","Jun",13220
-"jip","Jul",16557
-"jip","Aug",16412
-"motokar","Jan",42674
-"motokar","Feb",43329
-"motokar","Mar",48795
-"motokar","Apr",37396
-"motokar","May",46408
-"motokar","Jun",37504
-"motokar","Jul",47716
-"motokar","Aug",47667
-"motokar_pelbagai_utiliti","Jan",5142
-"motokar_pelbagai_utiliti","Feb",5025
-"motokar_pelbagai_utiliti","Mar",5475
-"motokar_pelbagai_utiliti","Apr",4471
-"motokar_pelbagai_utiliti","May",5819
-"motokar_pelbagai_utiliti","Jun",4094
-"motokar_pelbagai_utiliti","Jul",5939
-"motokar_pelbagai_utiliti","Aug",5669
-"pick_up","Jan",4415
-"pick_up","Feb",3432
-"pick_up","Mar",4599
-"pick_up","Apr",3300
-"pick_up","May",3944
-"pick_up","Jun",3924
-"pick_up","Jul",4178
-"pick_up","Aug",3758
-"window_van","Jan",2744
-"window_van","Feb",2320
-"window_van","Mar",2841
-"window_van","Apr",2892
-"window_van","May",2901
-"window_van","Jun",2466
-"window_van","Jul",2637
-"window_van","Aug",2569
+"jeeps","Jan",15211
+"jeeps","Feb",12829
+"jeeps","Mar",13357
+"jeeps","Apr",15468
+"jeeps","May",14829
+"jeeps","Jun",13220
+"jeeps","Jul",16557
+"jeeps","Aug",16412
+"motorcars","Jan",42674
+"motorcars","Feb",43329
+"motorcars","Mar",48795
+"motorcars","Apr",37396
+"motorcars","May",46408
+"motorcars","Jun",37504
+"motorcars","Jul",47716
+"motorcars","Aug",47667
+"MPVs","Jan",5142
+"MPVs","Feb",5025
+"MPVs","Mar",5475
+"MPVs","Apr",4471
+"MPVs","May",5819
+"MPVs","Jun",4094
+"MPVs","Jul",5939
+"MPVs","Aug",5669
+"pick-up trucks","Jan",4415
+"pick-up trucks","Feb",3432
+"pick-up trucks","Mar",4599
+"pick-up trucks","Apr",3300
+"pick-up trucks","May",3944
+"pick-up trucks","Jun",3924
+"pick-up trucks","Jul",4178
+"pick-up trucks","Aug",3758
+"window vans","Jan",2744
+"window vans","Feb",2320
+"window vans","Mar",2841
+"window vans","Apr",2892
+"window vans","May",2901
+"window vans","Jun",2466
+"window vans","Jul",2637
+"window vans","Aug",2569
