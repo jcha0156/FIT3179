@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Registrations in Malaysia</title>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.22.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.5.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.21.0"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        .section {
+            padding: 30px;
+            margin: 0;
+            background-color: #ffffff;
+            border-bottom: 10px solid #ddd;
+        }
+        .section:nth-child(odd) {
+            background-color: #fafafa;
+        }
+        .chart {
+            width: 90%;
+            margin: 20px auto;
+        }
+        p {
+            text-align: center;
+            width: 90%;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Vehicle Registrations in Malaysia - Data Visualizations</h1>
+
+    <!-- Introduction -->
+    <div class="section">
+        <p>This data visualization project provides insights into vehicle registrations in Malaysia using three key visualizations. The project highlights the distribution of vehicle registrations across different states, the trend of monthly vehicle registrations by type, and the usage of various fuel types in registered vehicles. By exploring these visualizations, users can gain a deeper understanding of the patterns and preferences in Malaysia’s vehicle registration landscape, including which states have the highest registrations, how vehicle registrations fluctuate month-to-month, and the dominant fuel types used by registered vehicles.</p>
+    </div>
+
+    <!-- Section 1: Vehicle Registrations by State in Malaysia -->
+    <div class="section">
+        <h2>Vehicle Registrations by State in Malaysia</h2>
+        <p>This map shows the total number of vehicles registered across each state in Malaysia. States are color-coded to represent the number of registered vehicles, where darker colors indicate a higher number of registrations. Hover over any state to view the exact registration count.</p>
+        <div id="vis1" class="chart"></div>
+    </div>
+
+    <!-- Section 2: Monthly Vehicle Registrations by Vehicle Type -->
+    <div class="section">
+        <h2>Monthly Vehicle Registrations by Vehicle Type (2024)</h2>
+        <p>This line chart tracks the number of vehicles registered each month in 2024, categorized by vehicle type. It reveals that motorcars are the most popular type of vehicle, showing a consistently higher registration rate. You can filter the chart by vehicle type to focus on a specific category.</p>
+        <div id="vis2" class="chart"></div>
+    </div>
+
+    <!-- Section 3: Fuel Type Usage Across Registered Vehicles -->
+    <div class="section">
+        <h2>Fuel Type Usage Across Registered Vehicles</h2>
+        <p>This bar chart illustrates the distribution of vehicles based on the type of fuel they use. Petrol is the most widely used fuel, making up the majority of vehicles, while alternative fuel types such as hybrid and electric vehicles are used in smaller quantities. The chart offers insights into fuel preferences among registered vehicles in Malaysia.</p>
+        <div id="vis3" class="chart"></div>
+    </div>
+
+    <script>
+        // Visualization 1: Vehicle Registrations by State in Malaysia
+        const spec1 = {
+            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+            "title": {
+                "text": "Vehicle Registrations by State in Malaysia",
+                "fontSize": 35,
+                "font": "Serif"
+            },
+            "width": 1440,
+            "height": 720,
+            "background": "lightgrey",  
+            "projection": {
+                "type": "equalEarth",
+                "center": [106.5, 4],
+                "scale": 4550
+            },
+            "data": {
+                "url": "https://raw.githubusercontent.com/WillsonLouisse/Assignment-2/refs/heads/main/malaysia-states.topojson",
+                "format": {"type": "topojson", "feature": "states"}
+            },
+            "layer": [
+                {
+                "transform": [
+                    {
+                    "lookup": "properties.Name",
+                    "from": {
+                        "data": {
+                        "url": "https://raw.githubusercontent.com/jcha0156/FIT3179/refs/heads/main/vehicle_count_by_state.csv" 
+                        },
+                        "key": "state",
+                        "fields": ["TotalVehicles"] 
+                    }
+                    }
+                ],
+                "mark": {"type": "geoshape", "stroke": "white", "strokeWidth": 1},
+                "encoding": {
+                    "color": {
+                    "field": "TotalVehicles",
+                    "type": "quantitative",
+                    "legend": {
+                        "titleFontSize": 14,
+                        "labelFontSize": 14,
+                        "symbolSize": 200,
+                        "title": "Total Registered Vehicles",
+                        "orient": "bottom-left"
+                    },
+                    "scale": {"scheme": "blueorange"}
+                    },
+                    "tooltip": [
+                    {"field": "properties.Name", "type": "nominal", "title": "State: "},
+                    {
+                        "field": "TotalVehicles",
+                        "type": "quantitative",
+                        "title": "Registered Vehicles: "
+                    }
+                    ]
+                }
+                },
+                {
+                "transform": [
+                    {
+                    "lookup": "properties.Name",
+                    "from": {
+                        "data": {
+                        "url": "https://raw.githubusercontent.com/jcha0156/FIT3179/refs/heads/main/state_longitude_latitude.csv"
+                        },
+                        "key": "state",
+                        "fields": ["latitude", "longitude"]
+                    }
+                    }
+                ],
+                "mark": {"type": "text"},
+                "encoding": {
+                    "longitude": {"field": "longitude", "type": "quantitative"},
+                    "latitude": {"field": "latitude", "type": "quantitative"},
+                    "text": {"field": "properties.Name", "type": "nominal"}
+                }
+                }
+            ]
+        };
+
+
+        // Visualization 2: Monthly Vehicle Registrations by Vehicle Type
+        const spec2 = {
+            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+            "width": 1000,
+            "height": 600,
+            "data": {
+                "url": "https://raw.githubusercontent.com/jcha0156/FIT3179/refs/heads/main/registration_by_month.csv"
+            },
+            "title": {
+                "text": "Monthly Vehicle Registrations by Vehicle Type (2024)",
+                "fontSize": 25,
+                "font": "Serif"
+            },
+            "mark": {
+                "type": "line",
+                "point": true,
+                "tooltip": true
+            },
+            "selection": {
+                "VehicleTypeSelection": {
+                "type": "single",
+                "fields": ["type"],
+                "bind": {
+                    "input": "select",
+                    "options": [
+                    null, "motorcars", "MPVs", "jeeps", "pick-up trucks", "window vans"
+                    ],
+                    "name": "Select Vehicle Type: ",
+                    "inputWidth": 200
+                }
+                }
+            },
+            "encoding": {
+                "x": {
+                "field": "Month",
+                "type": "ordinal",
+                "axis": {
+                    "title": "Month",
+                    "labelFont": "Helvetica",
+                    "labelFontSize": 12,
+                    "labelAngle": 0
+                },
+                "sort": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug"]  
+                },
+                "y": {
+                "field": "TotalRegistrations",
+                "type": "quantitative",
+                "axis": {
+                    "title": "Number of Vehicles Registered",
+                    "labelFont": "Helvetica",
+                    "labelFontSize": 12
+                }
+                },
+                "color": {
+                "field": "type",
+                "type": "nominal",
+                "legend": {
+                    "title": "Vehicle Type",
+                    "labelFont": "Helvetica",
+                    "labelFontSize": 12
+                }
+                },
+                "opacity": {
+                "condition": {
+                    "selection": "VehicleTypeSelection",
+                    "value": 1
+                },
+                "value": 0.2
+                },
+                "tooltip": [
+                {
+                    "field": "Month",
+                    "type": "ordinal",
+                    "title": "Month: "
+                },
+                {
+                    "field": "type",
+                    "type": "nominal",
+                    "title": "Vehicle Type: "
+                },
+                {
+                    "field": "TotalRegistrations",
+                    "type": "quantitative",
+                    "title": "Vehicles Registered: "
+                }
+                ]
+            }
+        };
+
+
+        // Visualization 3: Fuel Type Usage Across Registered Vehicles
+        const spec3 = {
+            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+            "width": 1000,
+            "height": 600,
+            "autosize": {"type": "fit", "contains": "padding"},
+            "data": {
+                "url": "https://raw.githubusercontent.com/jcha0156/FIT3179/refs/heads/main/vehicle_count_by_fuel.csv"
+            },
+            "title": {
+                "text": "Fuel Type Usage Across Registered Vehicles",
+                "fontSize": 25,
+                "font": "Serif"
+            },
+            "mark": {"type": "bar", "tooltip": true},
+            "encoding": {
+                "x": {
+                "field": "fuel",
+                "type": "nominal",
+                "axis": {
+                    "title": "Fuel Type",
+                    "labelFont": "Helvetica",
+                    "labelFontSize": 12
+                },
+                "sort": "-y"
+                },
+                "y": {
+                "field": "TotalVehicles",
+                "type": "quantitative",
+                "axis": {
+                    "title": "Number of Vehicles",
+                    "labelFont": "Helvetica",
+                    "labelFontSize": 12
+                }
+                },
+                "color": {"field": "fuel", "type": "nominal", "legend": null},
+                "tooltip": [
+                {"field": "fuel", "type": "nominal", "title": "Type of Fuel: "},
+                {
+                    "field": "TotalVehicles",
+                    "type": "quantitative",
+                    "title": "Total Registered Vehicles: "
+                }
+                ]
+            },
+            "config": {}
+            };
+
+        // Embed the visualizations into the webpage
+        vegaEmbed('#vis1', spec1);
+        vegaEmbed('#vis2', spec2);
+        vegaEmbed('#vis3', spec3);
+    </script>
+</body>
+</html
