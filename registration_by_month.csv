@@ -1,0 +1,41 @@
+type,Month,TotalRegistrations
+Jeeps,Jan,15211
+Jeeps,Feb,12829
+Jeeps,Mar,13357
+Jeeps,Apr,15468
+Jeeps,May,14829
+Jeeps,Jun,13220
+Jeeps,Jul,16557
+Jeeps,Aug,16412
+Motorcars,Jan,42674
+Motorcars,Feb,43329
+Motorcars,Mar,48795
+Motorcars,Apr,37396
+Motorcars,May,46408
+Motorcars,Jun,37504
+Motorcars,Jul,47716
+Motorcars,Aug,47667
+Multi-Purpose Vehicles,Jan,5142
+Multi-Purpose Vehicles,Feb,5025
+Multi-Purpose Vehicles,Mar,5475
+Multi-Purpose Vehicles,Apr,4471
+Multi-Purpose Vehicles,May,5819
+Multi-Purpose Vehicles,Jun,4094
+Multi-Purpose Vehicles,Jul,5939
+Multi-Purpose Vehicles,Aug,5669
+Pickup Trucks,Jan,4415
+Pickup Trucks,Feb,3432
+Pickup Trucks,Mar,4599
+Pickup Trucks,Apr,3300
+Pickup Trucks,May,3944
+Pickup Trucks,Jun,3924
+Pickup Trucks,Jul,4178
+Pickup Trucks,Aug,3758
+Window Vans,Jan,2744
+Window Vans,Feb,2320
+Window Vans,Mar,2841
+Window Vans,Apr,2892
+Window Vans,May,2901
+Window Vans,Jun,2466
+Window Vans,Jul,2637
+Window Vans,Aug,2569
