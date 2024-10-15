@@ -10,13 +10,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Quicksand', sans-serif;
+            font-family: 'Times New Roman', serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: #f6f1e5;
+            font-size: 18px;
         }
-        h1, h2 {
+        h1 {
             text-align: center;
+            font-family: 'Times New Roman', serif;
+            font-size: 40px;
         }
         .section {
             padding: 30px;
@@ -40,7 +43,7 @@
 </head>
 <body>
 
-    <h1>Vehicle Registrations in Malaysia - Data Visualizations</h1>
+    <h1>Vehicle Registrations in Malaysia (2024) - Data Visualizations</h1>
 
     <!-- Introduction -->
     <div class="section">
@@ -49,22 +52,19 @@
 
     <!-- Section 1: Vehicle Registrations by State in Malaysia -->
     <div class="section">
-        <h2>Vehicle Registrations by State in Malaysia</h2>
         <p>This map shows the total number of vehicles registered across each state in Malaysia. States are color-coded to represent the number of registered vehicles, where darker colors indicate a higher number of registrations. Hover over any state to view the exact registration count.</p>
         <div id="vis1" class="chart"></div>
     </div>
 
     <!-- Section 2: Monthly Vehicle Registrations by Vehicle Type -->
     <div class="section">
-        <h2>Monthly Vehicle Registrations by Vehicle Type (2024)</h2>
         <p>This line chart tracks the number of vehicles registered each month in 2024, categorized by vehicle type. It reveals that motorcars are the most popular type of vehicle, showing a consistently higher registration rate. You can filter the chart by vehicle type to focus on a specific category.</p>
         <div id="vis2" class="chart"></div>
     </div>
 
     <!-- Section 3: Fuel Type Usage Across Registered Vehicles -->
     <div class="section">
-        <h2>Fuel Type Usage Across Registered Vehicles</h2>
-        <p>This bar chart illustrates the distribution of vehicles based on the type of fuel they use. Petrol is the most widely used fuel, making up the majority of vehicles, while alternative fuel types such as hybrid and electric vehicles are used in smaller quantities. The chart offers insights into fuel preferences among registered vehicles in Malaysia.</p>
+        <p>This bar chart illustrates the distribution of vehicles based on the type of fuel they use. Petrol is the most widely used fuel, making up the majority of vehicles, while alternative fuel types such as hybrid, electric and diesel vehicles are used in smaller quantities. The chart offers insights into fuel preferences among registered vehicles in Malaysia.</p>
         <div id="vis3" class="chart"></div>
     </div>
 
@@ -73,8 +73,8 @@
         const spec1 = {
             "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
             "title": {
-                "text": "Vehicle Registrations by State in Malaysia",
-                "fontSize": 35,
+                "text": "Vehicle Registrations by State",
+                "fontSize": 25,
                 "font": "Serif"
             },
             "width": 1440,
@@ -115,7 +115,7 @@
                         "title": "Total Registered Vehicles",
                         "orient": "bottom-left"
                     },
-                    "scale": {"scheme": "blueorange"}
+                    "scale": {"scheme": "lighttealblue"}
                     },
                     "tooltip": [
                     {"field": "properties.Name", "type": "nominal", "title": "State: "},
@@ -160,7 +160,7 @@
                 "url": "https://raw.githubusercontent.com/jcha0156/FIT3179/refs/heads/main/registration_by_month.csv"
             },
             "title": {
-                "text": "Monthly Vehicle Registrations by Vehicle Type (2024)",
+                "text": "Monthly Vehicle Registrations by Vehicle Type",
                 "fontSize": 25,
                 "font": "Serif"
             },
@@ -176,7 +176,7 @@
                 "bind": {
                     "input": "select",
                     "options": [
-                    null, "motorcars", "MPVs", "jeeps", "pick-up trucks", "window vans"
+                    null, "Motorcars", "Multi-Purpose Vehicles", "Jeeps", "Pickup Trucks", "Window Vans"
                     ],
                     "name": "Select Vehicle Type: ",
                     "inputWidth": 200
@@ -224,17 +224,17 @@
                 {
                     "field": "Month",
                     "type": "ordinal",
-                    "title": "Month: "
+                    "title": "Month "
                 },
                 {
                     "field": "type",
                     "type": "nominal",
-                    "title": "Vehicle Type: "
+                    "title": "Vehicle Type "
                 },
                 {
                     "field": "TotalRegistrations",
                     "type": "quantitative",
-                    "title": "Vehicles Registered: "
+                    "title": "Vehicles Registered "
                 }
                 ]
             }
@@ -271,18 +271,18 @@
                 "field": "TotalVehicles",
                 "type": "quantitative",
                 "axis": {
-                    "title": "Number of Vehicles",
+                    "title": "Number of Vehicles Registered",
                     "labelFont": "Helvetica",
                     "labelFontSize": 12
                 }
                 },
                 "color": {"field": "fuel", "type": "nominal", "legend": null},
                 "tooltip": [
-                {"field": "fuel", "type": "nominal", "title": "Type of Fuel: "},
+                {"field": "fuel", "type": "nominal", "title": "Type of Fuel "},
                 {
                     "field": "TotalVehicles",
                     "type": "quantitative",
-                    "title": "Total Registered Vehicles: "
+                    "title": "Total Registered Vehicles "
                 }
                 ]
             },
