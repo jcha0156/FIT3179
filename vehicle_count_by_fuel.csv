@@ -1,9 +1,6 @@
 "fuel","TotalVehicles"
-"diesel",2570
-"diesel_ng",1
-"electric",14321
-"greendiesel",33608
-"hybrid_diesel",1
-"hybrid_petrol",15764
-"petrol",497659
-"petrol_ng",2
+"Diesel",2570
+"Electric",14321
+"Green Diesel",33608
+"Hybrid",15765
+"Petrol",497659
